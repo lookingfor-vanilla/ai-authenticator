@@ -96,10 +96,33 @@ if is_light:
   font-family: 'DM Sans', sans-serif;
 }
 
+@keyframes pageFadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes radarPing {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.radar-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background-color: #10b981;
+  border-radius: 50%;
+  animation: radarPing 2s infinite ease-in-out;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
 .block-container {
   max-width: 1280px;
   padding-top: 1.4rem;
   padding-bottom: 3.5rem;
+  animation: pageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 #MainMenu, footer { visibility: hidden; }
@@ -415,8 +438,12 @@ div[data-testid="stMetric"] div[data-testid="stMetricValue"] { color: #0f172a !i
   padding: 48px 40px;
   border-radius: 26px;
   border: 1.5px solid #cbd5e1;
-  background: linear-gradient(135deg, #ffffff, #f1f5f9);
-  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(rgba(99,102,241,0.08) 1.5px, transparent 1.5px),
+    linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  background-size: 24px 24px, 100% 100%;
+  box-shadow: 0 10px 32px rgba(0,0,0,.04);
   margin-bottom: 1.5rem;
 }
 
@@ -467,6 +494,32 @@ div[data-testid="stMetric"] div[data-testid="stMetricValue"] { color: #0f172a !i
 }
 .team-card h4 { color: #0f172a !important; }
 .team-card p { color: #64748b !important; }
+
+.contributor-card {
+  transition: all 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  cursor: pointer;
+}
+.contributor-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.08) !important;
+  border-color: var(--card-accent, #6366f1) !important;
+}
+.contributor-card:hover .avatar-badge {
+  transform: scale(1.08) rotate(4deg) !important;
+  box-shadow: 0 0 20px var(--card-accent, rgba(99,102,241,0.4)) !important;
+}
+
+div[data-testid="stExpander"] {
+  border-radius: 14px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  transition: all 0.22s ease !important;
+}
+div[data-testid="stExpander"]:hover {
+  border-color: #6366f1 !important;
+  box-shadow: 0 4px 18px rgba(99,102,241,0.08) !important;
+}
 
 /* =========================================================
    FORENSIC LEFT TASKBAR (AUTOMATIC SLIDING DOCK) - LIGHT MODE
@@ -582,10 +635,33 @@ else:
   font-family: 'DM Sans', sans-serif;
 }
 
+@keyframes pageFadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes radarPing {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.radar-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background-color: #10b981;
+  border-radius: 50%;
+  animation: radarPing 2s infinite ease-in-out;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
 .block-container {
   max-width: 1280px;
   padding-top: 1.4rem;
   padding-bottom: 3.5rem;
+  animation: pageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 #MainMenu, footer { visibility: hidden; }
@@ -870,11 +946,14 @@ div[data-testid="stMetric"] {
   padding: 48px 40px;
   border-radius: 26px;
   border: 1px solid rgba(164,122,255,.28);
-  background:
+  background-color: #0c0e1e;
+  background-image:
+    radial-gradient(rgba(85,229,255,0.08) 1.5px, transparent 1.5px),
     radial-gradient(ellipse at 82% 22%, rgba(85,229,255,.14), transparent 36%),
     radial-gradient(ellipse at 70% 100%, rgba(164,122,255,.18), transparent 42%),
     linear-gradient(135deg, #191a36, #0d0e1e);
-  box-shadow: 0 25px 80px rgba(0,0,0,.25);
+  background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
+  box-shadow: 0 25px 80px rgba(0,0,0,.35);
   margin-bottom: 1.5rem;
 }
 
@@ -919,6 +998,32 @@ div[data-testid="stMetric"] {
 }
 .team-card h4 { color: #ffffff !important; }
 .team-card p { color: #94a3b8 !important; }
+
+.contributor-card {
+  transition: all 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  cursor: pointer;
+}
+.contributor-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.5) !important;
+  border-color: var(--card-accent, #55e5ff) !important;
+}
+.contributor-card:hover .avatar-badge {
+  transform: scale(1.08) rotate(4deg) !important;
+  box-shadow: 0 0 22px var(--card-accent, rgba(85,229,255,0.4)) !important;
+}
+
+div[data-testid="stExpander"] {
+  border-radius: 14px !important;
+  border: 1px solid rgba(85,229,255,0.18) !important;
+  overflow: hidden !important;
+  background: rgba(14, 18, 38, 0.6) !important;
+  transition: all 0.22s ease !important;
+}
+div[data-testid="stExpander"]:hover {
+  border-color: rgba(85,229,255,0.4) !important;
+  box-shadow: 0 0 16px rgba(85,229,255,0.15) !important;
+}
 
 /* =========================================================
    FORENSIC LEFT TASKBAR (AUTOMATIC SLIDING DOCK) - DARK MODE
@@ -2019,7 +2124,9 @@ with st.sidebar:
     st.markdown(f"""
     <div style="background:{sidebar_card_bg};border:1.5px solid {sidebar_card_border};border-radius:14px;padding:12px 14px;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-        <span style="font-size:0.75rem;font-weight:700;color:{'#059669' if is_light else '#10b981'};">● Node Active</span>
+        <span style="display:inline-flex;align-items:center;font-size:0.75rem;font-weight:700;color:{'#059669' if is_light else '#10b981'};">
+          <span class="radar-dot"></span> Node Active
+        </span>
         <span style="font-size:0.7rem;font-family:'DM Mono',monospace;color:{brand_sub_color};font-weight:700;">NIST FIPS 180-4</span>
       </div>
       <div style="font-size:0.76rem;color:{muted_text};line-height:1.4;">
@@ -2043,7 +2150,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# MAIN VIEW CONSOLE HEADER & BREADCRUMB
+# MAIN VIEW CONSOLE HEADER & FLOATING GLASS BREADCRUMB
 # ---------------------------------------------------------
 page_icons = {
     "Home": "⌂",
@@ -2056,33 +2163,42 @@ page_icons = {
 }
 cur_icon = page_icons.get(st.session_state.page, "◈")
 
-top_head, top_ctrl = st.columns([2.2, 1], vertical_alignment="center")
+glass_bg = "rgba(255, 255, 255, 0.85)" if is_light else "rgba(14, 18, 42, 0.8)"
+glass_border = "#cbd5e1" if is_light else "rgba(85, 229, 255, 0.2)"
+glass_shadow = "0 6px 24px rgba(0,0,0,0.04)" if is_light else "0 8px 32px rgba(0,0,0,0.4)"
 
-with top_head:
+head_col1, head_col2 = st.columns([2.5, 0.8], vertical_alignment="center")
+
+with head_col1:
     st.markdown(f"""
-    <div style="display:flex;align-items:center;gap:12px;">
-      <span class="pill">TASKBAR ACTIVE</span>
-      <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:1.02rem;color:{brand_title_color};">
-        CONSOLE WORKSPACE / <span style="color:{brand_sub_color};font-weight:800;">{cur_icon} {st.session_state.page.upper()}</span>
+    <div style="background:{glass_bg};backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1.5px solid {glass_border};border-radius:16px;padding:12px 20px;box-shadow:{glass_shadow};display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="pill" style="font-size:0.7rem;padding:4px 10px;">◈ HASHPROOF</span>
+        <span style="color:{muted_text};font-size:0.85rem;font-weight:700;">›</span>
+        <span style="font-size:0.82rem;font-weight:700;color:{muted_text};">CONSOLE</span>
+        <span style="color:{muted_text};font-size:0.85rem;font-weight:700;">›</span>
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:0.96rem;color:{brand_sub_color};letter-spacing:-0.01em;">
+          {cur_icon} {st.session_state.page.upper()}
+        </span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="display:inline-flex;align-items:center;font-size:0.75rem;font-weight:700;color:{'#059669' if is_light else '#10b981'};">
+          <span class="radar-dot"></span> NODE ONLINE
+        </span>
+        <span style="font-size:0.7rem;font-family:'DM Mono',monospace;color:{muted_text};background:{'#f1f5f9' if is_light else 'rgba(255,255,255,0.06)'};padding:3px 8px;border-radius:6px;border:1px solid {glass_border};">
+          LATENCY: 0ms
+        </span>
       </div>
     </div>
     """, unsafe_allow_html=True)
 
-with top_ctrl:
-    c_status, c_theme = st.columns([1.2, 0.8], vertical_alignment="center")
-    with c_status:
-        st.markdown(
-            '<div style="text-align:right"><span class="pill">'
-            '● Evidence Node Online</span></div>',
-            unsafe_allow_html=True
-        )
-    with c_theme:
-        head_btn_label = "🌙 Dark" if is_light else "☀️ Light"
-        if st.button(head_btn_label, key="top_header_theme_btn", use_container_width=True):
-            st.session_state.theme_mode = "Dark" if is_light else "Light"
-            st.rerun()
+with head_col2:
+    head_btn_label = "🌙 Dark Mode" if is_light else "☀️ Light Mode"
+    if st.button(head_btn_label, key="top_header_theme_btn", use_container_width=True):
+        st.session_state.theme_mode = "Dark" if is_light else "Light"
+        st.rerun()
 
-st.markdown("<hr style='margin:0.8rem 0 1.2rem 0'>", unsafe_allow_html=True)
+st.markdown("<div style='margin-bottom: 1.2rem;'></div>", unsafe_allow_html=True)
 
 # ---------------------------------------------------------
 # PAGE 1: HOME
@@ -2194,8 +2310,8 @@ if st.session_state.page == "Home":
             tag_color = "#4f46e5" if is_light else accent
             spec_color = "#64748b" if is_light else "#94a3b8"
             st.markdown(f"""
-            <div style="background:{card_bg};border:1.5px solid {card_border};border-radius:18px;padding:22px 18px;text-align:center;transition:all 0.25s ease;box-shadow:{card_shadow};min-height:220px;display:flex;flex-direction:column;justify-content:center;">
-              <div style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(2,132,199,0.15));border:2px solid {accent};margin:0 auto 12px auto;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15rem;color:{accent};letter-spacing:0.05em;">
+            <div class="contributor-card" style="--card-accent:{accent};background:{card_bg};border:1.5px solid {card_border};border-radius:18px;padding:22px 18px;text-align:center;box-shadow:{card_shadow};min-height:220px;display:flex;flex-direction:column;justify-content:center;">
+              <div class="avatar-badge" style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(2,132,199,0.15));border:2px solid {accent};margin:0 auto 12px auto;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15rem;color:{accent};letter-spacing:0.05em;transition:all 0.3s ease;">
                 {initials}
               </div>
               <h4 style="margin:0 0 4px 0;color:{name_color};font-size:1.02rem;font-weight:700;">{name}</h4>
@@ -2335,22 +2451,61 @@ elif st.session_state.page == "Analysis":
         else:
             st.success("✅ **Clean Software Audit**: No common desktop photo editor signatures were identified in the metadata.")
 
-        st.markdown("#### Cryptographic Fingerprints")
+        st.markdown("#### Cryptographic Bitstream Digest")
         h_col1, h_col2 = st.columns(2)
         with h_col1:
-            st.caption("SHA-256 (Courtroom Forensic Standard)")
-            st.markdown(f'<div class="hash-box">{report.get("sha256", "—")}</div>', unsafe_allow_html=True)
-            st.code(report.get("sha256", "—"), language="text")
+            st.markdown(f"""
+            <div class="pod-card" style="padding:16px 20px;margin-bottom:12px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <span class="pill" style="font-size:0.7rem;background:rgba(99,102,241,0.1);color:{'#4f46e5' if is_light else '#a47aff'};border:1px solid rgba(99,102,241,0.25);">
+                  SHA-256 (COURTROOM STANDARD)
+                </span>
+                <span style="font-size:0.72rem;font-weight:700;color:{'#059669' if is_light else '#10b981'};">● 256-BIT DETERMINISTIC</span>
+              </div>
+              <div class="hash-box" style="margin:0;font-size:0.86rem;">{report.get("sha256", "—")}</div>
+            </div>
+            """, unsafe_allow_html=True)
         with h_col2:
-            st.caption("MD5 (Legacy Quick Checksum)")
-            st.markdown(f'<div class="hash-box">{report.get("md5", "—")}</div>', unsafe_allow_html=True)
-            st.caption(f"SHA-1: `{report.get('sha1', '—')}`")
+            st.markdown(f"""
+            <div class="pod-card" style="padding:16px 20px;margin-bottom:12px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <span class="pill" style="font-size:0.7rem;background:rgba(2,132,199,0.1);color:{'#0284c7' if is_light else '#55e5ff'};border:1px solid rgba(2,132,199,0.25);">
+                  LEGACY DIGESTS
+                </span>
+                <span style="font-size:0.72rem;color:{muted_text};">MD5 & SHA-1</span>
+              </div>
+              <div style="font-size:0.75rem;font-weight:700;color:{muted_text};margin-bottom:3px;">MD5 (128-BIT):</div>
+              <div class="hash-box" style="margin:0 0 8px 0;font-size:0.82rem;">{report.get("md5", "—")}</div>
+              <div style="font-size:0.75rem;font-weight:700;color:{muted_text};margin-bottom:3px;">SHA-1 (160-BIT):</div>
+              <div class="hash-box" style="margin:0;font-size:0.82rem;">{report.get("sha1", "—")}</div>
+            </div>
+            """, unsafe_allow_html=True)
 
         if report.get("reference_hash"):
             if report.get("hash_match"):
-                st.success("✅ **PARITY VERIFIED**: 100% byte agreement with reference hash.")
+                st.markdown("""
+                <div class="verdict-banner verdict-match">
+                  <div style="font-size:2.2rem;">🛡️</div>
+                  <div>
+                    <h3 style="margin:0;font-size:1.15rem;font-weight:800;">CRYPTOGRAPHIC PARITY VERIFIED</h3>
+                    <p style="margin:4px 0 0 0;font-size:0.88rem;line-height:1.4;">
+                      100% Zero-bit modification detected. The file bitstream matches the subpoena discovery reference hash.
+                    </p>
+                  </div>
+                </div>
+                """, unsafe_allow_html=True)
             else:
-                st.error("🚨 **PARITY MISMATCH**: File byte sequence differs from the provided reference hash.")
+                st.markdown("""
+                <div class="verdict-banner verdict-mismatch">
+                  <div style="font-size:2.2rem;">⚠️</div>
+                  <div>
+                    <h3 style="margin:0;font-size:1.15rem;font-weight:800;">BITSTREAM PARITY MISMATCH DETECTED</h3>
+                    <p style="margin:4px 0 0 0;font-size:0.88rem;line-height:1.4;">
+                      Cryptographic collision failure. The suspect file digest diverges from the reference record.
+                    </p>
+                  </div>
+                </div>
+                """, unsafe_allow_html=True)
 
         tab1, tab2, tab3, tab4 = st.tabs(["Findings & Audit", "Categorized EXIF", "Raw Headers", "Export Package"])
 
