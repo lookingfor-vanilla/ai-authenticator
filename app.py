@@ -19,7 +19,7 @@ st.set_page_config(
     page_title="HashProof AI | Evidence Intelligence",
     page_icon="◈",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
 # ---------------------------------------------------------
@@ -468,6 +468,86 @@ div[data-testid="stMetric"] div[data-testid="stMetricValue"] { color: #0f172a !i
 .team-card h4 { color: #0f172a !important; }
 .team-card p { color: #64748b !important; }
 
+/* =========================================================
+   FORENSIC LEFT TASKBAR (AUTOMATIC SLIDING DOCK) - LIGHT MODE
+   ========================================================= */
+
+@keyframes sidebarSlideIn {
+  0% { transform: translateX(-40px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes buttonSlideIn {
+  0% { opacity: 0; transform: translateX(-18px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+section[data-testid="stSidebar"] {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-right: 1.5px solid #cbd5e1 !important;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.04) !important;
+  animation: sidebarSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+section[data-testid="stSidebar"] > div:first-child {
+  padding-top: 1.2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+section[data-testid="stSidebar"] div.stButton {
+  animation: buttonSlideIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* Base styling for Taskbar Navigation items */
+section[data-testid="stSidebar"] div.stButton > button {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  padding: 12px 18px !important;
+  border-radius: 14px !important;
+  font-size: 0.93rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  margin-bottom: 7px !important;
+  background: #ffffff !important;
+  color: #334155 !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02) !important;
+  transition: all 0.26s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
+
+/* AUTOMATIC SLIDE EFFECT ON HOVER */
+section[data-testid="stSidebar"] div.stButton > button:hover {
+  transform: translateX(10px) !important;
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #6366f1 !important;
+  border-left: 5px solid #6366f1 !important;
+  box-shadow: 0 6px 18px rgba(99,102,241,0.12) !important;
+}
+
+/* Active Workspace Button in Light Mode (Primary) */
+section[data-testid="stSidebar"] div.stButton > button[kind="primary"] {
+  background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
+  color: #ffffff !important;
+  border: 1px solid #4338ca !important;
+  border-left: 6px solid #0284c7 !important;
+  transform: translateX(6px) !important;
+  box-shadow: 0 6px 20px rgba(99,102,241,0.26) !important;
+  font-weight: 700 !important;
+}
+
+section[data-testid="stSidebar"] div.stButton > button[kind="primary"]:hover {
+  transform: translateX(12px) !important;
+  box-shadow: 0 8px 26px rgba(99,102,241,0.35) !important;
+}
+
 .footer {
   text-align: center;
   color: #64748b !important;
@@ -839,6 +919,86 @@ div[data-testid="stMetric"] {
 }
 .team-card h4 { color: #ffffff !important; }
 .team-card p { color: #94a3b8 !important; }
+
+/* =========================================================
+   FORENSIC LEFT TASKBAR (AUTOMATIC SLIDING DOCK) - DARK MODE
+   ========================================================= */
+
+@keyframes sidebarSlideInDark {
+  0% { transform: translateX(-40px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes buttonSlideInDark {
+  0% { opacity: 0; transform: translateX(-18px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+section[data-testid="stSidebar"] {
+  background: linear-gradient(180deg, #0d0f22 0%, #070814 100%) !important;
+  border-right: 1px solid rgba(85, 229, 255, 0.16) !important;
+  box-shadow: 6px 0 32px rgba(0, 0, 0, 0.6) !important;
+  animation: sidebarSlideInDark 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+section[data-testid="stSidebar"] > div:first-child {
+  padding-top: 1.2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+section[data-testid="stSidebar"] div.stButton {
+  animation: buttonSlideInDark 0.38s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* Base styling for Taskbar Navigation items */
+section[data-testid="stSidebar"] div.stButton > button {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  padding: 12px 18px !important;
+  border-radius: 14px !important;
+  font-size: 0.93rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  margin-bottom: 7px !important;
+  background: rgba(19, 22, 45, 0.75) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(85, 229, 255, 0.12) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+  transition: all 0.26s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
+
+/* AUTOMATIC SLIDE EFFECT ON HOVER */
+section[data-testid="stSidebar"] div.stButton > button:hover {
+  transform: translateX(10px) !important;
+  background: rgba(85, 229, 255, 0.12) !important;
+  color: #ffffff !important;
+  border-color: rgba(85, 229, 255, 0.4) !important;
+  border-left: 5px solid #55e5ff !important;
+  box-shadow: 0 0 20px rgba(85,229,255,0.25) !important;
+}
+
+/* Active Workspace Button in Dark Mode (Primary) */
+section[data-testid="stSidebar"] div.stButton > button[kind="primary"] {
+  background: linear-gradient(135deg, #a47aff, #55e5ff) !important;
+  color: #080914 !important;
+  border: 1px solid rgba(85, 229, 255, 0.4) !important;
+  border-left: 6px solid #ffffff !important;
+  transform: translateX(6px) !important;
+  box-shadow: 0 0 24px rgba(85,229,255,0.35) !important;
+  font-weight: 800 !important;
+}
+
+section[data-testid="stSidebar"] div.stButton > button[kind="primary"]:hover {
+  transform: translateX(12px) !important;
+  box-shadow: 0 0 32px rgba(85,229,255,0.5) !important;
+}
 
 .footer {
   text-align: center;
@@ -1790,71 +1950,139 @@ def add_report(report):
     st.session_state.latest_report = saved_report
 
 # ---------------------------------------------------------
-# 6. HEADER & PERSISTENT NAVIGATION (7 FORENSIC MODULES)
+# 6. FORENSIC LEFT SLIDING TASKBAR DOCK (st.sidebar)
 # ---------------------------------------------------------
-logo, status, theme_col = st.columns([1.8, 1, 0.8], vertical_alignment="center")
+brand_title_color = "#0f172a" if is_light else "#f4f4ff"
+brand_sub_color = "#0284c7" if is_light else "#55e5ff"
+sidebar_card_bg = "#f1f5f9" if is_light else "rgba(19, 22, 45, 0.65)"
+sidebar_card_border = "#cbd5e1" if is_light else "rgba(85, 229, 255, 0.18)"
+muted_text = "#64748b" if is_light else "#94a3b8"
 
-with logo:
-    brand_title_color = "#0f172a" if is_light else "#f4f4ff"
-    brand_sub_color = "#0284c7" if is_light else "#55e5ff"
+with st.sidebar:
+    # Taskbar Brand Header
     st.markdown(f"""
-    <div style="display:flex;align-items:center;gap:14px">
-      <div style="display:flex;align-items:center;justify-content:center;
-      width:44px;height:44px;border-radius:12px;
-      background:linear-gradient(135deg,#a47aff,#55e5ff);
-      color:#090914;font-size:24px;font-weight:900;box-shadow:0 0 22px rgba(85,229,255,.3)">◈</div>
-      <div>
-        <div style="font-family:Manrope,sans-serif;font-weight:800;
-        letter-spacing:-.03em;font-size:1.18rem;color:{brand_title_color};line-height:1.1">
-          HASHPROOF AI
-        </div>
-        <div style="font-size:.72rem;color:{brand_sub_color};letter-spacing:.12em;font-weight:700">
-          EVIDENCE INTELLIGENCE CONSOLE
+    <div style="padding:4px 0 16px 0;border-bottom:1.5px solid {sidebar_card_border};margin-bottom:14px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:42px;height:42px;border-radius:12px;
+        background:linear-gradient(135deg,#a47aff,#55e5ff);
+        color:#090914;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;
+        box-shadow:0 0 20px rgba(85,229,255,.3);">◈</div>
+        <div>
+          <div style="font-family:Manrope,sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:-.03em;color:{brand_title_color};line-height:1.1;">
+            HASHPROOF AI
+          </div>
+          <div style="font-size:0.68rem;color:{brand_sub_color};letter-spacing:.12em;font-weight:700;">
+            FORENSIC SLIDING TASKBAR
+          </div>
         </div>
       </div>
     </div>
     """, unsafe_allow_html=True)
 
-with status:
-    st.markdown(
-        '<div style="text-align:right"><span class="pill">'
-        '● Forensic Node Online</span></div>',
-        unsafe_allow_html=True
-    )
+    # Section Eyebrow
+    st.markdown(f"""
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 10px 4px;">
+      <span style="font-size:0.7rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:{muted_text};">
+        FORENSIC MODULES
+      </span>
+      <span style="font-size:0.68rem;font-family:'DM Mono',monospace;color:{brand_sub_color};">
+        7 WORKSPACES
+      </span>
+    </div>
+    """, unsafe_allow_html=True)
 
-with theme_col:
-    btn_label = "🌙 Dark Mode" if is_light else "☀️ Light Mode"
-    if st.button(btn_label, key="theme_toggle_btn", use_container_width=True):
+    # The 7 Left Taskbar Navigation Items with automatic sliding hover effect
+    nav_items = [
+        ("Home", "⌂  Home Overview"),
+        ("Analysis", "◈  Image & Doc Audit"),
+        ("Comparison", "⚖  Dual Parity (A/B)"),
+        ("Audio", "🎙️  Audio Telemetry"),
+        ("Lab", "🧪  Crypto Parity Lab"),
+        ("History", f"▤  Evidence Archive ({len(st.session_state.reports)})"),
+        ("About", "ⓘ  Legal & Standards"),
+    ]
+
+    for p_key, p_label in nav_items:
+        is_active = (st.session_state.page == p_key)
+        if st.button(
+            p_label,
+            key=f"taskbar_nav_{p_key}",
+            use_container_width=True,
+            type="primary" if is_active else "secondary",
+        ):
+            st.session_state.page = p_key
+            st.rerun()
+
+    st.markdown(f"<div style='margin:16px 0 14px 0;border-top:1.5px solid {sidebar_card_border};'></div>", unsafe_allow_html=True)
+
+    # Live Forensic Node Telemetry Box in the taskbar
+    st.markdown(f"""
+    <div style="background:{sidebar_card_bg};border:1.5px solid {sidebar_card_border};border-radius:14px;padding:12px 14px;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+        <span style="font-size:0.75rem;font-weight:700;color:{'#059669' if is_light else '#10b981'};">● Node Active</span>
+        <span style="font-size:0.7rem;font-family:'DM Mono',monospace;color:{brand_sub_color};font-weight:700;">NIST FIPS 180-4</span>
+      </div>
+      <div style="font-size:0.76rem;color:{muted_text};line-height:1.4;">
+        Active Ledger: <b>{len(st.session_state.reports)}</b> records synced
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.write("")
+    # Quick Theme Mode Toggle inside the taskbar
+    sidebar_btn_label = "🌙 Dark Mode" if is_light else "☀️ Light Mode"
+    if st.button(sidebar_btn_label, key="sidebar_theme_toggle_btn", use_container_width=True):
         st.session_state.theme_mode = "Dark" if is_light else "Light"
         st.rerun()
 
-st.markdown("<hr style='margin:1.2rem 0'>", unsafe_allow_html=True)
+    # Contributor badge
+    st.markdown(f"""
+    <div style="margin-top:18px;text-align:center;font-size:0.72rem;color:{muted_text};line-height:1.5;">
+      Engineered by <b>Mukul</b> · <b>Padma</b><br><b>Ashna</b> · <b>Kaveesha</b>
+    </div>
+    """, unsafe_allow_html=True)
 
-nav_cols = st.columns(7)
-pages = ["Home", "Analysis", "Comparison", "Audio", "Lab", "History", "About"]
+# ---------------------------------------------------------
+# MAIN VIEW CONSOLE HEADER & BREADCRUMB
+# ---------------------------------------------------------
+page_icons = {
+    "Home": "⌂",
+    "Analysis": "◈",
+    "Comparison": "⚖",
+    "Audio": "🎙️",
+    "Lab": "🧪",
+    "History": "▤",
+    "About": "ⓘ",
+}
+cur_icon = page_icons.get(st.session_state.page, "◈")
 
-for col, page in zip(nav_cols, pages):
-    with col:
-        label = {
-            "Home": "⌂ Home",
-            "Analysis": "◈ Image/Doc",
-            "Comparison": "⚖ Parity (A/B)",
-            "Audio": "🎙️ Audio",
-            "Lab": "🧪 Crypto Lab",
-            "History": f"▤ Archive ({len(st.session_state.reports)})",
-            "About": "ⓘ Standards",
-        }[page]
+top_head, top_ctrl = st.columns([2.2, 1], vertical_alignment="center")
 
-        if st.button(
-            label,
-            key=f"nav_{page}",
-            use_container_width=True,
-            type="primary" if st.session_state.page == page else "secondary",
-        ):
-            st.session_state.page = page
+with top_head:
+    st.markdown(f"""
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="pill">TASKBAR ACTIVE</span>
+      <div style="font-family:'Manrope',sans-serif;font-weight:700;font-size:1.02rem;color:{brand_title_color};">
+        CONSOLE WORKSPACE / <span style="color:{brand_sub_color};font-weight:800;">{cur_icon} {st.session_state.page.upper()}</span>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with top_ctrl:
+    c_status, c_theme = st.columns([1.2, 0.8], vertical_alignment="center")
+    with c_status:
+        st.markdown(
+            '<div style="text-align:right"><span class="pill">'
+            '● Evidence Node Online</span></div>',
+            unsafe_allow_html=True
+        )
+    with c_theme:
+        head_btn_label = "🌙 Dark" if is_light else "☀️ Light"
+        if st.button(head_btn_label, key="top_header_theme_btn", use_container_width=True):
+            st.session_state.theme_mode = "Dark" if is_light else "Light"
             st.rerun()
 
-st.write("")
+st.markdown("<hr style='margin:0.8rem 0 1.2rem 0'>", unsafe_allow_html=True)
 
 # ---------------------------------------------------------
 # PAGE 1: HOME
