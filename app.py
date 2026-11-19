@@ -2551,8 +2551,8 @@ elif st.session_state.page == "About":
             </div>
             <div style="padding:16px;background:rgba(192,132,252,0.05);border:1px solid rgba(192,132,252,0.18);border-radius:12px;">
               <b style="color:#c084fc;font-size:1.02rem;">◈ Kaveesha Negi</b>
-              <div style="font-size:0.8rem;color:#38bdf8;font-weight:700;margin:4px 0 2px 0;">Lead Architect & Core Engine</div>
-              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">Platform architecture, printable forensic certificate pipeline, and SQLite evidence ledger.</div>
+              <div style="font-size:0.8rem;color:#38bdf8;font-weight:700;margin:4px 0 2px 0;">Lead Architect</div>
+              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">Full-Stack System & Evidence Engine, platform architecture, forensic certificate pipeline, and SQLite evidence ledger.</div>
             </div>
           </div>
         </div>
