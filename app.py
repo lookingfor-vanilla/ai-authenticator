@@ -53,6 +53,7 @@ for key, value in {
     "page": "Home",
     "reports": [],
     "latest_report": None,
+    "theme_mode": "Light",
 }.items():
     if key not in st.session_state:
         st.session_state[key] = value
@@ -64,10 +65,419 @@ if "reports_loaded" not in st.session_state:
         st.session_state.reports = []
     st.session_state.reports_loaded = True
 
+is_light = (st.session_state.get("theme_mode", "Light") == "Light")
+
 # ---------------------------------------------------------
-# 4. HIGH-TECH FORENSIC STYLING (CSS)
+# 4. HIGH-TECH FORENSIC STYLING (ADAPTIVE LIGHT / DARK CSS)
 # ---------------------------------------------------------
-st.markdown("""
+if is_light:
+    st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --line: rgba(148, 163, 184, 0.3);
+  --text: #0f172a;
+  --muted: #64748b;
+  --violet: #6366f1;
+  --cyan: #0284c7;
+  --emerald: #059669;
+  --rose: #e11d48;
+}
+
+.stApp {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(99,102,241,.07), transparent 36%),
+    radial-gradient(ellipse at 92% 8%, rgba(2,132,199,.07), transparent 32%),
+    #f8fafc;
+  color: #0f172a;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.block-container {
+  max-width: 1280px;
+  padding-top: 1.4rem;
+  padding-bottom: 3.5rem;
+}
+
+#MainMenu, footer { visibility: hidden; }
+header[data-testid="stHeader"] { background: transparent; }
+
+h1, h2, h3, h4 {
+  font-family: 'Manrope', sans-serif !important;
+  letter-spacing: -.035em;
+  color: #0f172a !important;
+}
+
+p, li, label { color: #334155 !important; }
+small { color: #64748b !important; }
+hr { border-color: #e2e8f0 !important; }
+
+@keyframes floatDoodle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(3deg); }
+}
+
+@keyframes pulseBorder {
+  0%, 100% { border-color: rgba(99,102,241,0.25); box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+  50% { border-color: rgba(2,132,199,0.35); box-shadow: 0 8px 30px rgba(2,132,199,0.08); }
+}
+
+@keyframes soundWave {
+  0%, 100% { height: 6px; }
+  50% { height: 28px; }
+}
+
+.equalizer-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 38px;
+  margin: 12px 0 16px;
+}
+
+.equalizer-bar {
+  width: 5px;
+  background: linear-gradient(180deg, #0284c7, #6366f1);
+  border-radius: 4px;
+  animation: soundWave 1.2s infinite ease-in-out;
+}
+
+.equalizer-bar:nth-child(1) { animation-delay: 0.1s; height: 10px; }
+.equalizer-bar:nth-child(2) { animation-delay: 0.3s; height: 22px; }
+.equalizer-bar:nth-child(3) { animation-delay: 0.15s; height: 16px; }
+.equalizer-bar:nth-child(4) { animation-delay: 0.45s; height: 30px; }
+.equalizer-bar:nth-child(5) { animation-delay: 0.25s; height: 24px; }
+.equalizer-bar:nth-child(6) { animation-delay: 0.5s; height: 18px; }
+.equalizer-bar:nth-child(7) { animation-delay: 0.35s; height: 28px; }
+.equalizer-bar:nth-child(8) { animation-delay: 0.2s; height: 12px; }
+
+/* File uploader chip */
+div[data-testid="stFileUploaderFile"],
+div[data-testid="stFileUploaderFile"] > div {
+  background-color: #f1f5f9 !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+}
+
+div[data-testid="stFileUploaderFile"] * {
+  color: #0f172a !important;
+  fill: #0284c7 !important;
+}
+
+div[data-testid="stAlert"] {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+
+div[data-testid="stAlert"] * { color: #334155 !important; }
+
+div[data-testid="stTextInput"] div[data-baseweb="input"],
+div[data-testid="stTextInput"] div[data-baseweb="base-input"] {
+  background-color: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 12px !important;
+  padding: 4px 8px !important;
+}
+
+div[data-testid="stTextInput"] input {
+  color: #0f172a !important;
+  background-color: transparent !important;
+  font-family: 'DM Mono', monospace !important;
+  font-size: 0.92rem !important;
+}
+
+div[data-testid="stFileUploader"] {
+  background: #f8fafc !important;
+  border: 1.5px dashed #94a3b8 !important;
+  border-radius: 18px !important;
+  padding: 16px !important;
+}
+
+section[data-testid="stFileUploaderDropzone"],
+div[data-testid="stFileUploaderDropzone"] {
+  background: #ffffff !important;
+  border: 1.5px dashed #cbd5e1 !important;
+  border-radius: 14px !important;
+  color: #0f172a !important;
+  padding: 18px !important;
+}
+
+[data-testid="stFileUploaderDropzoneInstructions"] span,
+[data-testid="stFileUploaderDropzoneInstructions"] small,
+div[data-testid="stFileUploaderDropzone"] span,
+div[data-testid="stFileUploaderDropzone"] small {
+  color: #475569 !important;
+  font-size: 0.82rem !important;
+}
+
+section[data-testid="stFileUploaderDropzone"] button,
+div[data-testid="stFileUploaderDropzone"] button {
+  background: linear-gradient(120deg, #6366f1, #4f46e5) !important;
+  color: #ffffff !important;
+  border: 1px solid #4f46e5 !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+}
+
+.feature-banner {
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  border: 1.5px solid #cbd5e1;
+  border-radius: 22px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.04);
+  animation: pulseBorder 5s infinite ease-in-out;
+}
+
+.feature-banner h2 { font-size: 1.85rem; margin: 10px 0 6px; color: #0f172a !important; }
+.feature-banner p { color: #475569 !important; }
+
+.pod-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.pod-card h4 { color: #0f172a !important; }
+
+.pod-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.pod-tag-a {
+  background: rgba(99,102,241,.1);
+  border: 1px solid rgba(99,102,241,.25);
+  color: #4f46e5;
+}
+
+.pod-tag-b {
+  background: rgba(2,132,199,.1);
+  border: 1px solid rgba(2,132,199,.25);
+  color: #0284c7;
+}
+
+.hash-box {
+  padding: 12px 16px;
+  background: #f1f5f9;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  color: #0284c7;
+  font-family: 'DM Mono', monospace;
+  font-size: .84rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  margin: 6px 0 12px;
+}
+
+.doodle-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 15px;
+  text-align: center;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 18px;
+  background: #f8fafc;
+  margin-top: 10px;
+}
+
+.doodle-hero div { color: #334155 !important; }
+.doodle-title { font-weight: 700; color: #0f172a !important; font-size: 0.95rem; }
+.doodle-sub { color: #64748b !important; font-size: 0.82rem; margin-top: 4px; }
+
+.doodle-icon {
+  font-size: 3rem;
+  animation: floatDoodle 3.5s infinite ease-in-out;
+  display: inline-block;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 4px 12px rgba(2,132,199,0.25));
+}
+
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(99,102,241,.1);
+  border: 1px solid rgba(99,102,241,.25);
+  border-radius: 8px;
+  color: #4f46e5;
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.verdict-banner {
+  padding: 20px 24px;
+  border-radius: 16px;
+  margin: 18px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.verdict-match {
+  background: #ecfdf5;
+  border: 1.5px solid #10b981;
+  color: #065f46;
+}
+.verdict-match h3 { color: #065f46 !important; }
+.verdict-match p { color: #047857 !important; }
+
+.verdict-mismatch {
+  background: #fff1f2;
+  border: 1.5px solid #f43f5e;
+  color: #9f1239;
+}
+.verdict-mismatch h3 { color: #9f1239 !important; }
+.verdict-mismatch p { color: #be123c !important; }
+
+.stButton > button {
+  border-radius: 12px;
+  min-height: 2.85rem;
+  padding: .55rem 1.15rem;
+  font-weight: 700;
+  transition: all .2s ease;
+}
+
+.stButton > button[kind="secondary"] {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+}
+
+.stButton > button[kind="secondary"]:hover {
+  border-color: #6366f1 !important;
+  color: #6366f1 !important;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.15) !important;
+}
+
+.stButton > button[kind="primary"],
+.stDownloadButton > button {
+  background: linear-gradient(105deg, #6366f1, #4f46e5) !important;
+  color: #ffffff !important;
+  border: 1px solid #4f46e5 !important;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.25) !important;
+}
+
+.stButton > button[kind="primary"]:hover,
+.stDownloadButton > button:hover {
+  box-shadow: 0 6px 22px rgba(99,102,241,0.35) !important;
+  transform: translateY(-1px);
+}
+
+div[data-testid="stMetric"] {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  padding: 16px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important;
+}
+
+div[data-testid="stMetric"] label { color: #64748b !important; }
+div[data-testid="stMetric"] div[data-testid="stMetricValue"] { color: #0f172a !important; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  color: #0369a1 !important;
+  border: 1px solid rgba(2,132,199,.25) !important;
+  background: rgba(2,132,199,.08) !important;
+  font-size: .74rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 48px 40px;
+  border-radius: 26px;
+  border: 1.5px solid #cbd5e1;
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+  margin-bottom: 1.5rem;
+}
+
+.gradient {
+  background: linear-gradient(95deg, #4f46e5, #0284c7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.feature {
+  min-height: 180px;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  transition: all .25s ease;
+}
+
+.feature h3 { color: #0f172a !important; }
+.feature p { color: #475569 !important; }
+
+.feature:hover {
+  border-color: #6366f1;
+  box-shadow: 0 8px 24px rgba(99,102,241,0.12);
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(99,102,241,.1);
+  border: 1px solid rgba(99,102,241,.25);
+  color: #4f46e5;
+  font-size: 1.2rem;
+  margin-bottom: 14px;
+}
+
+.team-card {
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05) !important;
+}
+.team-card h4 { color: #0f172a !important; }
+.team-card p { color: #64748b !important; }
+
+.footer {
+  text-align: center;
+  color: #64748b !important;
+  font-size: .78rem;
+  padding-top: 40px;
+}
+</style>
+""", unsafe_allow_html=True)
+else:
+    st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
@@ -286,6 +696,9 @@ div[data-testid="stFileUploaderDropzone"] button {
   margin-top: 10px;
 }
 
+.doodle-title { font-weight: 700; color: #ffffff !important; font-size: 0.95rem; }
+.doodle-sub { color: #94a3b8 !important; font-size: 0.82rem; margin-top: 4px; }
+
 .doodle-icon {
   font-size: 3rem;
   animation: floatDoodle 3.5s infinite ease-in-out;
@@ -419,6 +832,13 @@ div[data-testid="stMetric"] {
   font-size: 1.2rem;
   margin-bottom: 14px;
 }
+
+.team-card {
+  background: linear-gradient(145deg, #13162b, #0c0e1c);
+  border: 1px solid rgba(85,229,255,0.18);
+}
+.team-card h4 { color: #ffffff !important; }
+.team-card p { color: #94a3b8 !important; }
 
 .footer {
   text-align: center;
@@ -1372,10 +1792,12 @@ def add_report(report):
 # ---------------------------------------------------------
 # 6. HEADER & PERSISTENT NAVIGATION (7 FORENSIC MODULES)
 # ---------------------------------------------------------
-logo, tagline = st.columns([2, 1], vertical_alignment="center")
+logo, status, theme_col = st.columns([1.8, 1, 0.8], vertical_alignment="center")
 
 with logo:
-    st.markdown("""
+    brand_title_color = "#0f172a" if is_light else "#f4f4ff"
+    brand_sub_color = "#0284c7" if is_light else "#55e5ff"
+    st.markdown(f"""
     <div style="display:flex;align-items:center;gap:14px">
       <div style="display:flex;align-items:center;justify-content:center;
       width:44px;height:44px;border-radius:12px;
@@ -1383,22 +1805,28 @@ with logo:
       color:#090914;font-size:24px;font-weight:900;box-shadow:0 0 22px rgba(85,229,255,.3)">◈</div>
       <div>
         <div style="font-family:Manrope,sans-serif;font-weight:800;
-        letter-spacing:-.03em;font-size:1.18rem;color:#f4f4ff;line-height:1.1">
+        letter-spacing:-.03em;font-size:1.18rem;color:{brand_title_color};line-height:1.1">
           HASHPROOF AI
         </div>
-        <div style="font-size:.72rem;color:#55e5ff;letter-spacing:.12em;font-weight:700">
+        <div style="font-size:.72rem;color:{brand_sub_color};letter-spacing:.12em;font-weight:700">
           EVIDENCE INTELLIGENCE CONSOLE
         </div>
       </div>
     </div>
     """, unsafe_allow_html=True)
 
-with tagline:
+with status:
     st.markdown(
         '<div style="text-align:right"><span class="pill">'
         '● Forensic Node Online</span></div>',
         unsafe_allow_html=True
     )
+
+with theme_col:
+    btn_label = "🌙 Dark Mode" if is_light else "☀️ Light Mode"
+    if st.button(btn_label, key="theme_toggle_btn", use_container_width=True):
+        st.session_state.theme_mode = "Dark" if is_light else "Light"
+        st.rerun()
 
 st.markdown("<hr style='margin:1.2rem 0'>", unsafe_allow_html=True)
 
@@ -1433,7 +1861,8 @@ st.write("")
 # ---------------------------------------------------------
 if st.session_state.page == "Home":
 
-    st.markdown("""
+    hero_sub_color = "#475569" if is_light else "#b8bdd8"
+    st.markdown(f"""
     <section class="hero">
       <span class="pill">DIGITAL FORENSICS · MULTI-MODAL EVIDENCE SUITE</span>
       <h1>Trust the evidence.<br>
@@ -1445,7 +1874,7 @@ if st.session_state.page == "Home":
       </p>
       <div style="height:2px;width:100%;margin:25px 0;
       background:linear-gradient(90deg,#a47aff,#55e5ff,transparent)"></div>
-      <div style="color:#b8bdd8;font-size:.85rem;font-weight:500">
+      <div style="color:{hero_sub_color};font-size:.85rem;font-weight:500">
         ◈ Image & Document Hashing &nbsp; / &nbsp;
         ◈ 🎙️ Audio Wiretap & Voice Note Triage &nbsp; / &nbsp;
         ◈ Dual-Evidence Bit Parity
@@ -1507,36 +1936,45 @@ if st.session_state.page == "Home":
 
     st.write("")
     st.write("")
-    st.markdown("""
+    team_head_color = "#0f172a" if is_light else "#ffffff"
+    team_sub_color = "#64748b" if is_light else "#94a3b8"
+    st.markdown(f"""
     <div style="margin-top: 35px; margin-bottom: 22px;">
       <span class="pill">PROJECT CONTRIBUTORS · RESEARCH COHORT</span>
-      <h2 style="margin: 8px 0 6px 0; font-size: 1.6rem; color: #ffffff;">Forensic Engineering Team</h2>
-      <p style="color: #94a3b8; font-size: 0.92rem; margin: 0;">
+      <h2 style="margin: 8px 0 6px 0; font-size: 1.6rem; color: {team_head_color};">Forensic Engineering Team</h2>
+      <p style="color: {team_sub_color}; font-size: 0.92rem; margin: 0;">
         Architected and engineered by the HashProof research group for automated cryptographic evidence triage and verification.
       </p>
     </div>
     """, unsafe_allow_html=True)
 
     team_members = [
-        ("Mukul Aggarwal", "MA", "Cryptography & Hashing", "SHA-256/1 & Bitstream Parity", "#55e5ff"),
-        ("P. Padma Priya", "PP", "Acoustic Intelligence", "Audio Forensics & Signal Parsing", "#a47aff"),
-        ("Ashna Zia", "AZ", "Metadata & EXIF Triage", "Container Analysis & Footprint Audit", "#38bdf8"),
-        ("Kaveesha Negi", "KN", "Lead Architect", "Full-Stack System & Evidence Engine", "#c084fc"),
+        ("Mukul Aggarwal", "MA", "Cryptography & Hashing", "SHA-256/1 & Bitstream Parity", "#0284c7" if is_light else "#55e5ff"),
+        ("P. Padma Priya", "PP", "Acoustic Intelligence", "Audio Forensics & Signal Parsing", "#6366f1" if is_light else "#a47aff"),
+        ("Ashna Zia", "AZ", "Metadata & EXIF Triage", "Container Analysis & Footprint Audit", "#0284c7" if is_light else "#38bdf8"),
+        ("Kaveesha Negi", "KN", "Lead Architect", "Full-Stack System & Evidence Engine", "#8b5cf6" if is_light else "#c084fc"),
     ]
 
     t_cols = st.columns(4)
     for col, (name, initials, role, specialty, accent) in zip(t_cols, team_members):
         with col:
+            card_bg = "#ffffff" if is_light else "linear-gradient(145deg, #13162b, #0c0e1c)"
+            card_border = "#e2e8f0" if is_light else "rgba(85,229,255,0.18)"
+            card_shadow = "0 4px 16px rgba(0,0,0,0.06)" if is_light else "0 8px 24px rgba(0,0,0,0.35)"
+            name_color = "#0f172a" if is_light else "#ffffff"
+            tag_bg = "rgba(99,102,241,0.08)" if is_light else "rgba(255,255,255,0.06)"
+            tag_color = "#4f46e5" if is_light else accent
+            spec_color = "#64748b" if is_light else "#94a3b8"
             st.markdown(f"""
-            <div style="background:linear-gradient(145deg, #13162b, #0c0e1c);border:1px solid rgba(85,229,255,0.18);border-radius:18px;padding:22px 18px;text-align:center;transition:all 0.25s ease;box-shadow:0 8px 24px rgba(0,0,0,0.35);min-height:220px;display:flex;flex-direction:column;justify-content:center;">
-              <div style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg, rgba(164,122,255,0.25), rgba(85,229,255,0.25));border:2px solid {accent};margin:0 auto 12px auto;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15rem;color:{accent};letter-spacing:0.05em;box-shadow:0 0 16px rgba(85,229,255,0.2);">
+            <div style="background:{card_bg};border:1.5px solid {card_border};border-radius:18px;padding:22px 18px;text-align:center;transition:all 0.25s ease;box-shadow:{card_shadow};min-height:220px;display:flex;flex-direction:column;justify-content:center;">
+              <div style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(2,132,199,0.15));border:2px solid {accent};margin:0 auto 12px auto;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15rem;color:{accent};letter-spacing:0.05em;">
                 {initials}
               </div>
-              <h4 style="margin:0 0 4px 0;color:#ffffff;font-size:1.02rem;font-weight:700;">{name}</h4>
-              <div style="display:inline-block;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,0.06);color:{accent};font-size:0.75rem;font-weight:700;margin:4px auto 8px auto;letter-spacing:0.03em;">
+              <h4 style="margin:0 0 4px 0;color:{name_color};font-size:1.02rem;font-weight:700;">{name}</h4>
+              <div style="display:inline-block;padding:3px 8px;border-radius:6px;background:{tag_bg};color:{tag_color};font-size:0.75rem;font-weight:700;margin:4px auto 8px auto;letter-spacing:0.03em;">
                 {role}
               </div>
-              <p style="margin:0;font-size:0.8rem;color:#94a3b8;line-height:1.4;">{specialty}</p>
+              <p style="margin:0;font-size:0.8rem;color:{spec_color};line-height:1.4;">{specialty}</p>
             </div>
             """, unsafe_allow_html=True)
 
@@ -1598,8 +2036,8 @@ elif st.session_state.page == "Analysis":
             <div class="doodle-hero">
               <div>
                 <div class="doodle-icon">📂</div>
-                <div style="font-weight:700;color:#ffffff;font-size:0.95rem">Awaiting Evidence Container</div>
-                <div style="color:#94a3b8;font-size:0.82rem;margin-top:4px">
+                <div class="doodle-title">Awaiting Evidence Container</div>
+                <div class="doodle-sub">
                   Drag & drop an image or document above to begin cryptographic triage
                 </div>
               </div>
@@ -1826,8 +2264,8 @@ elif st.session_state.page == "Comparison":
             <div class="doodle-hero">
               <div>
                 <div class="doodle-icon">🛡️</div>
-                <div style="font-weight:700;color:#ffffff;font-size:0.9rem">Evidence A Required</div>
-                <div style="color:#94a3b8;font-size:0.8rem;margin-top:2px">Upload the benchmark master file</div>
+                <div class="doodle-title">Evidence A Required</div>
+                <div class="doodle-sub">Upload the benchmark master file</div>
               </div>
             </div>
             """, unsafe_allow_html=True)
@@ -1857,8 +2295,8 @@ elif st.session_state.page == "Comparison":
             <div class="doodle-hero">
               <div>
                 <div class="doodle-icon">🔍</div>
-                <div style="font-weight:700;color:#ffffff;font-size:0.9rem">Evidence B Required</div>
-                <div style="color:#94a3b8;font-size:0.8rem;margin-top:2px">Upload the suspect comparison file</div>
+                <div class="doodle-title">Evidence B Required</div>
+                <div class="doodle-sub">Upload the suspect comparison file</div>
               </div>
             </div>
             """, unsafe_allow_html=True)
@@ -2035,8 +2473,8 @@ elif st.session_state.page == "Audio":
                 <div class="doodle-hero">
                   <div>
                     <div class="doodle-icon">📻</div>
-                    <div style="font-weight:700;color:#ffffff;font-size:0.95rem">Awaiting Audio Recording</div>
-                    <div style="color:#94a3b8;font-size:0.82rem;margin-top:4px">
+                    <div class="doodle-title">Awaiting Audio Recording</div>
+                    <div class="doodle-sub">
                       Upload WAV, MP3, or voice note to inspect acoustic telemetry
                     </div>
                   </div>
@@ -2471,12 +2909,18 @@ elif st.session_state.page == "About":
         ]
 
         for icon, title, desc in capabilities:
+            cap_bg = "#ffffff" if is_light else "rgba(20,24,48,0.8)"
+            cap_border = "#cbd5e1" if is_light else "rgba(85,229,255,0.18)"
+            cap_title = "#0f172a" if is_light else "#ffffff"
+            cap_desc = "#475569" if is_light else "#94a3b8"
+            icon_bg = "rgba(2,132,199,0.08)" if is_light else "rgba(85,229,255,0.1)"
+            icon_border = "rgba(2,132,199,0.2)" if is_light else "rgba(85,229,255,0.25)"
             st.markdown(f"""
-            <div style="background:rgba(20,24,48,0.8);border:1px solid rgba(85,229,255,0.18);border-radius:16px;padding:16px 20px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;">
-              <div style="font-size:1.5rem;background:rgba(85,229,255,0.1);border:1px solid rgba(85,229,255,0.25);border-radius:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">{icon}</div>
+            <div style="background:{cap_bg};border:1.5px solid {cap_border};border-radius:16px;padding:16px 20px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+              <div style="font-size:1.5rem;background:{icon_bg};border:1px solid {icon_border};border-radius:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">{icon}</div>
               <div>
-                <b style="color:#ffffff;font-size:0.95rem">{title}</b>
-                <p style="font-size:0.85rem;color:#94a3b8;margin:4px 0 0 0;line-height:1.5">{desc}</p>
+                <b style="color:{cap_title};font-size:0.95rem">{title}</b>
+                <p style="font-size:0.85rem;color:{cap_desc};margin:4px 0 0 0;line-height:1.5">{desc}</p>
               </div>
             </div>
             """, unsafe_allow_html=True)
@@ -2497,12 +2941,17 @@ elif st.session_state.page == "About":
         ]
 
         for icon, title, desc in limitations:
+            lim_bg = "#fff1f2" if is_light else "rgba(26,18,35,0.8)"
+            lim_border = "#fecdd3" if is_light else "rgba(244,63,94,0.2)"
+            lim_title = "#9f1239" if is_light else "#fecdd3"
+            lim_desc = "#881337" if is_light else "#cbd5e1"
+            lim_icon_bg = "rgba(244,63,94,0.08)" if is_light else "rgba(244,63,94,0.1)"
             st.markdown(f"""
-            <div style="background:rgba(26,18,35,0.8);border:1px solid rgba(244,63,94,0.2);border-radius:16px;padding:16px 20px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;">
-              <div style="font-size:1.5rem;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.25);border-radius:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">{icon}</div>
+            <div style="background:{lim_bg};border:1.5px solid {lim_border};border-radius:16px;padding:16px 20px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+              <div style="font-size:1.5rem;background:{lim_icon_bg};border:1px solid rgba(244,63,94,0.25);border-radius:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">{icon}</div>
               <div>
-                <b style="color:#fecdd3;font-size:0.95rem">{title}</b>
-                <p style="font-size:0.85rem;color:#cbd5e1;margin:4px 0 0 0;line-height:1.5">{desc}</p>
+                <b style="color:{lim_title};font-size:0.95rem">{title}</b>
+                <p style="font-size:0.85rem;color:{lim_desc};margin:4px 0 0 0;line-height:1.5">{desc}</p>
               </div>
             </div>
             """, unsafe_allow_html=True)
@@ -2527,32 +2976,61 @@ elif st.session_state.page == "About":
     st.write("")
     st.markdown('<div class="eyebrow">RESEARCH COHORT & ATTRIBUTION</div>', unsafe_allow_html=True)
     st.markdown("### Forensic Engineering & Development Team")
+
+    cohort_bg = "#ffffff" if is_light else "rgba(19,22,43,0.85)"
+    cohort_border = "#cbd5e1" if is_light else "rgba(85,229,255,0.2)"
+    cohort_text = "#334155" if is_light else "#e2e8f0"
+
+    m1_bg = "#f0f9ff" if is_light else "rgba(85,229,255,0.05)"
+    m1_border = "#bae6fd" if is_light else "rgba(85,229,255,0.18)"
+    m1_title = "#0369a1" if is_light else "#55e5ff"
+    m1_role = "#4f46e5" if is_light else "#a47aff"
+    m1_desc = "#475569" if is_light else "#cbd5e1"
+
+    m2_bg = "#f5f3ff" if is_light else "rgba(164,122,255,0.05)"
+    m2_border = "#ddd6fe" if is_light else "rgba(164,122,255,0.18)"
+    m2_title = "#6d28d9" if is_light else "#a47aff"
+    m2_role = "#0284c7" if is_light else "#55e5ff"
+    m2_desc = "#475569" if is_light else "#cbd5e1"
+
+    m3_bg = "#f0fdf4" if is_light else "rgba(56,189,248,0.05)"
+    m3_border = "#bbf7d0" if is_light else "rgba(56,189,248,0.18)"
+    m3_title = "#15803d" if is_light else "#38bdf8"
+    m3_role = "#7c3aed" if is_light else "#c084fc"
+    m3_desc = "#475569" if is_light else "#cbd5e1"
+
+    m4_bg = "#faf5ff" if is_light else "rgba(192,132,252,0.05)"
+    m4_border = "#e9d5ff" if is_light else "rgba(192,132,252,0.18)"
+    m4_title = "#7e22ce" if is_light else "#c084fc"
+    m4_role = "#0369a1" if is_light else "#38bdf8"
+    m4_desc = "#475569" if is_light else "#cbd5e1"
+
     st.markdown(
-        """
-        <div style="background:rgba(19,22,43,0.85);border:1px solid rgba(85,229,255,0.2);border-radius:18px;padding:24px 28px;margin-top:10px;">
-          <p style="color:#e2e8f0;font-size:0.95rem;margin-bottom:18px;line-height:1.6;">
+        f"""
+        <div style="background:{cohort_bg};border:1.5px solid {cohort_border};border-radius:18px;padding:24px 28px;margin-top:10px;box-shadow:0 4px 16px rgba(0,0,0,0.04);">
+          <p style="color:{cohort_text};font-size:0.95rem;margin-bottom:18px;line-height:1.6;">
             <strong>HashProof AI</strong> was designed, implemented, and benchmarked by the following research and engineering contributors:
           </p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;">
-            <div style="padding:16px;background:rgba(85,229,255,0.05);border:1px solid rgba(85,229,255,0.18);border-radius:12px;">
-              <b style="color:#55e5ff;font-size:1.02rem;">◈ Mukul Aggarwal</b>
-              <div style="font-size:0.8rem;color:#a47aff;font-weight:700;margin:4px 0 2px 0;">Cryptography & Bitstream Parity</div>
-              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">SHA-256/1 cryptographic subroutines, bit-parity comparator, and avalanche diffusion engine.</div>
+            <div style="padding:16px;background:{m1_bg};border:1.5px solid {m1_border};border-radius:12px;">
+              <b style="color:{m1_title};font-size:1.02rem;">◈ Mukul Aggarwal</b>
+              <div style="font-size:0.8rem;color:{m1_role};font-weight:700;margin:4px 0 2px 0;">Cryptography & Bitstream Parity</div>
+              <div style="font-size:0.82rem;color:{m1_desc};line-height:1.4;">SHA-256/1 cryptographic subroutines, bit-parity comparator, and avalanche diffusion engine.</div>
             </div>
-            <div style="padding:16px;background:rgba(164,122,255,0.05);border:1px solid rgba(164,122,255,0.18);border-radius:12px;">
-              <b style="color:#a47aff;font-size:1.02rem;">◈ P. Padma Priya</b>
-              <div style="font-size:0.8rem;color:#55e5ff;font-weight:700;margin:4px 0 2px 0;">Acoustic Signal Intelligence</div>
-              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">WAV & MP3 acoustic header parsing, waveform amplitude visualizer, and cut-point audit.</div>
+            <div style="padding:16px;background:{m2_bg};border:1.5px solid {m2_border};border-radius:12px;">
+              <b style="color:{m2_title};font-size:1.02rem;">◈ P. Padma Priya</b>
+              <div style="font-size:0.8rem;color:{m2_role};font-weight:700;margin:4px 0 2px 0;">Acoustic Signal Intelligence</div>
+              <div style="font-size:0.82rem;color:{m2_desc};line-height:1.4;">WAV & MP3 acoustic header parsing, waveform amplitude visualizer, and cut-point audit.</div>
             </div>
-            <div style="padding:16px;background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.18);border-radius:12px;">
-              <b style="color:#38bdf8;font-size:1.02rem;">◈ Ashna Zia</b>
-              <div style="font-size:0.8rem;color:#c084fc;font-weight:700;margin:4px 0 2px 0;">Metadata & Container Forensics</div>
-              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">EXIF metadata tag normalization, GPS geotag extraction, and editing software footprint detection.</div>
+            <div style="padding:16px;background:{m3_bg};border:1.5px solid {m3_border};border-radius:12px;">
+              <b style="color:{m3_title};font-size:1.02rem;">◈ Ashna Zia</b>
+              <div style="font-size:0.8rem;color:{m3_role};font-weight:700;margin:4px 0 2px 0;">Metadata & Container Forensics</div>
+              <div style="font-size:0.82rem;color:{m3_desc};line-height:1.4;">EXIF metadata tag normalization, GPS geotag extraction, and editing software footprint detection.</div>
             </div>
-            <div style="padding:16px;background:rgba(192,132,252,0.05);border:1px solid rgba(192,132,252,0.18);border-radius:12px;">
-              <b style="color:#c084fc;font-size:1.02rem;">◈ Kaveesha Negi</b>
-              <div style="font-size:0.8rem;color:#38bdf8;font-weight:700;margin:4px 0 2px 0;">Lead Architect</div>
-              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">Full-Stack System & Evidence Engine, platform architecture, forensic certificate pipeline, and SQLite evidence ledger.</div>
+            <div style="padding:16px;background:{m4_bg};border:1.5px solid {m4_border};border-radius:12px;">
+              <b style="color:{m4_title};font-size:1.02rem;">◈ Kaveesha Negi</b>
+              <div style="font-size:0.8rem;color:{m4_role};font-weight:700;margin:4px 0 2px 0;">Lead Architect</div>
+              <div style="font-size:0.82rem;color:{m4_desc};line-height:1.4;">Full-Stack System & Evidence Engine, platform architecture, forensic certificate pipeline, and SQLite evidence ledger.</div>
             </div>
           </div>
         </div>
@@ -2563,16 +3041,21 @@ elif st.session_state.page == "About":
 # ---------------------------------------------------------
 # 8. CLEAN GLOBAL FOOTER
 # ---------------------------------------------------------
+ft_border = "#e2e8f0" if is_light else "rgba(85,229,255,0.15)"
+ft_brand = "#0f172a" if is_light else "#ffffff"
+ft_eng_by = "#0284c7" if is_light else "#55e5ff"
+ft_names = "#1e293b" if is_light else "#ffffff"
+ft_sub = "#64748b" if is_light else "#94a3b8"
 st.markdown(
-    """
-    <div class="footer" style="margin-top: 50px; padding: 28px 10px; border-top: 1px solid rgba(85,229,255,0.15); text-align: center; color: #94a3b8; font-size: 0.88rem; line-height: 1.7;">
-      <strong style="color: #ffffff; letter-spacing: 0.05em;">HASHPROOF AI</strong> · DIGITAL EVIDENCE INTELLIGENCE CONSOLE<br>
-      <span style="color: #55e5ff; font-weight: 600;">Engineered by</span> 
-      <b style="color: #ffffff;">Mukul Aggarwal</b> &nbsp;·&nbsp; 
-      <b style="color: #ffffff;">P. Padma Priya</b> &nbsp;·&nbsp; 
-      <b style="color: #ffffff;">Ashna Zia</b> &nbsp;·&nbsp; 
-      <b style="color: #ffffff;">Kaveesha Negi</b><br>
-      <span style="font-size: 0.78rem; opacity: 0.8; color: #64748b;">NIST FIPS 180-4 Compliant · Federal Rules of Evidence Rule 902(13)/(14) Self-Authenticating Records</span>
+    f"""
+    <div class="footer" style="margin-top: 50px; padding: 28px 10px; border-top: 1.5px solid {ft_border}; text-align: center; color: {ft_sub}; font-size: 0.88rem; line-height: 1.7;">
+      <strong style="color: {ft_brand}; letter-spacing: 0.05em;">HASHPROOF AI</strong> · DIGITAL EVIDENCE INTELLIGENCE CONSOLE<br>
+      <span style="color: {ft_eng_by}; font-weight: 600;">Engineered by</span> 
+      <b style="color: {ft_names};">Mukul Aggarwal</b> &nbsp;·&nbsp; 
+      <b style="color: {ft_names};">P. Padma Priya</b> &nbsp;·&nbsp; 
+      <b style="color: {ft_names};">Ashna Zia</b> &nbsp;·&nbsp; 
+      <b style="color: {ft_names};">Kaveesha Negi</b><br>
+      <span style="font-size: 0.78rem; opacity: 0.85; color: {ft_sub};">NIST FIPS 180-4 Compliant · Federal Rules of Evidence Rule 902(13)/(14) Self-Authenticating Records</span>
     </div>
     """,
     unsafe_allow_html=True
