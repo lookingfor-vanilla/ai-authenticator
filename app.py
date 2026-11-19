@@ -1221,6 +1221,28 @@ section[data-testid="stSidebar"] div.stButton > button[kind="primary"]:hover {
 # ---------------------------------------------------------
 # 5. FORENSIC ENGINES (WITH SPEED CACHING & MP3 DECODER)
 # ---------------------------------------------------------
+def get_biometric_bitstream_svg(size=42, glow=True):
+    """Generates the official Biometric Bitstream vector logo for HashProof AI."""
+    glow_style = 'filter:drop-shadow(0 0 12px rgba(16,185,129,0.45));' if glow else ''
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="{size}" height="{size}" style="vertical-align:middle;flex-shrink:0;{glow_style}">
+  <defs>
+    <linearGradient id="bioBitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="45%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="#0d111d"/>
+  <!-- Outer Papillary Arch -->
+  <path d="M22 64 A28 28 0 0 1 78 64" fill="none" stroke="url(#bioBitGrad)" stroke-width="5" stroke-linecap="round"/>
+  <!-- Circuit Track Middle Arch -->
+  <path d="M32 64 A18 18 0 0 1 68 64" fill="none" stroke="url(#bioBitGrad)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="10 4"/>
+  <!-- Inner Biometric Core -->
+  <path d="M42 64 A8 8 0 0 1 58 64" fill="none" stroke="url(#bioBitGrad)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Precision Cryptographic Checkmark -->
+  <path d="M35 49 L47 61 L76 29" fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>"""
+
 @st.cache_data(show_spinner=False)
 def calculate_hashes(data: bytes):
     return {
@@ -2062,8 +2084,8 @@ def generate_html_certificate(report: dict) -> str:
       <!-- Header -->
       <div class="cert-header">
         <div class="cert-logo">
-          <div class="cert-badge-icon">◈</div>
-          <div class="cert-title-group">
+          {get_biometric_bitstream_svg(46, glow=False)}
+          <div class="cert-title-group" style="margin-left: 14px;">
             <h1>HashProof AI Forensic Laboratory</h1>
             <p>Digital Evidence & Cryptographic Verification Division</p>
           </div>
@@ -2172,10 +2194,7 @@ with st.sidebar:
     st.markdown(f"""
     <div style="padding:4px 0 16px 0;border-bottom:1.5px solid {sidebar_card_border};margin-bottom:14px;">
       <div style="display:flex;align-items:center;gap:12px;">
-        <div style="width:42px;height:42px;border-radius:12px;
-        background:linear-gradient(135deg,#a47aff,#55e5ff);
-        color:#090914;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;
-        box-shadow:0 0 20px rgba(85,229,255,.3);">◈</div>
+        {get_biometric_bitstream_svg(42, glow=True)}
         <div>
           <div style="font-family:Manrope,sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:-.03em;color:{brand_title_color};line-height:1.1;">
             HASHPROOF AI
@@ -2277,7 +2296,8 @@ with head_col1:
     st.markdown(f"""
     <div style="background:{glass_bg};backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1.5px solid {glass_border};border-radius:16px;padding:12px 20px;box-shadow:{glass_shadow};display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:10px;">
-        <span class="pill" style="font-size:0.7rem;padding:4px 10px;">◈ HASHPROOF</span>
+        {get_biometric_bitstream_svg(28, glow=False)}
+        <span class="pill" style="font-size:0.7rem;padding:4px 10px;">HASHPROOF</span>
         <span style="color:{muted_text};font-size:0.85rem;font-weight:700;">›</span>
         <span style="font-size:0.82rem;font-weight:700;color:{muted_text};">CONSOLE</span>
         <span style="color:{muted_text};font-size:0.85rem;font-weight:700;">›</span>
@@ -2312,7 +2332,10 @@ if st.session_state.page == "Home":
     hero_sub_color = "#475569" if is_light else "#b8bdd8"
     st.markdown(f"""
     <section class="hero">
-      <span class="pill">DIGITAL FORENSICS · MULTI-MODAL EVIDENCE SUITE</span>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        {get_biometric_bitstream_svg(36, glow=False)}
+        <span class="pill">DIGITAL FORENSICS · MULTI-MODAL EVIDENCE SUITE</span>
+      </div>
       <h1>Trust the evidence.<br>
       <span class="gradient">Verify the details.</span></h1>
       <p>
