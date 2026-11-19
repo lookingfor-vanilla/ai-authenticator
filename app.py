@@ -1505,6 +1505,41 @@ if st.session_state.page == "Home":
                 unsafe_allow_html=True
             )
 
+    st.write("")
+    st.write("")
+    st.markdown("""
+    <div style="margin-top: 35px; margin-bottom: 22px;">
+      <span class="pill">PROJECT CONTRIBUTORS · RESEARCH COHORT</span>
+      <h2 style="margin: 8px 0 6px 0; font-size: 1.6rem; color: #ffffff;">Forensic Engineering Team</h2>
+      <p style="color: #94a3b8; font-size: 0.92rem; margin: 0;">
+        Architected and engineered by the HashProof research group for automated cryptographic evidence triage and verification.
+      </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    team_members = [
+        ("Mukul Aggarwal", "MA", "Cryptography & Hashing", "SHA-256/1 & Bitstream Parity", "#55e5ff"),
+        ("P. Padma Priya", "PP", "Acoustic Intelligence", "Audio Forensics & Signal Parsing", "#a47aff"),
+        ("Ashna Zia", "AZ", "Metadata & EXIF Triage", "Container Analysis & Footprint Audit", "#38bdf8"),
+        ("Kaveesha Negi", "KN", "Lead Architect", "Full-Stack System & Evidence Engine", "#c084fc"),
+    ]
+
+    t_cols = st.columns(4)
+    for col, (name, initials, role, specialty, accent) in zip(t_cols, team_members):
+        with col:
+            st.markdown(f"""
+            <div style="background:linear-gradient(145deg, #13162b, #0c0e1c);border:1px solid rgba(85,229,255,0.18);border-radius:18px;padding:22px 18px;text-align:center;transition:all 0.25s ease;box-shadow:0 8px 24px rgba(0,0,0,0.35);min-height:220px;display:flex;flex-direction:column;justify-content:center;">
+              <div style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg, rgba(164,122,255,0.25), rgba(85,229,255,0.25));border:2px solid {accent};margin:0 auto 12px auto;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15rem;color:{accent};letter-spacing:0.05em;box-shadow:0 0 16px rgba(85,229,255,0.2);">
+                {initials}
+              </div>
+              <h4 style="margin:0 0 4px 0;color:#ffffff;font-size:1.02rem;font-weight:700;">{name}</h4>
+              <div style="display:inline-block;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,0.06);color:{accent};font-size:0.75rem;font-weight:700;margin:4px auto 8px auto;letter-spacing:0.03em;">
+                {role}
+              </div>
+              <p style="margin:0;font-size:0.8rem;color:#94a3b8;line-height:1.4;">{specialty}</p>
+            </div>
+            """, unsafe_allow_html=True)
+
 # ---------------------------------------------------------
 # PAGE 2: IMAGE & DOCUMENT ANALYSIS WORKSPACE
 # ---------------------------------------------------------
@@ -2489,11 +2524,56 @@ elif st.session_state.page == "About":
             "Hence, missing EXIF is common on web media and does not automatically imply malicious intent."
         )
 
+    st.write("")
+    st.markdown('<div class="eyebrow">RESEARCH COHORT & ATTRIBUTION</div>', unsafe_allow_html=True)
+    st.markdown("### Forensic Engineering & Development Team")
+    st.markdown(
+        """
+        <div style="background:rgba(19,22,43,0.85);border:1px solid rgba(85,229,255,0.2);border-radius:18px;padding:24px 28px;margin-top:10px;">
+          <p style="color:#e2e8f0;font-size:0.95rem;margin-bottom:18px;line-height:1.6;">
+            <strong>HashProof AI</strong> was designed, implemented, and benchmarked by the following research and engineering contributors:
+          </p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;">
+            <div style="padding:16px;background:rgba(85,229,255,0.05);border:1px solid rgba(85,229,255,0.18);border-radius:12px;">
+              <b style="color:#55e5ff;font-size:1.02rem;">◈ Mukul Aggarwal</b>
+              <div style="font-size:0.8rem;color:#a47aff;font-weight:700;margin:4px 0 2px 0;">Cryptography & Bitstream Parity</div>
+              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">SHA-256/1 cryptographic subroutines, bit-parity comparator, and avalanche diffusion engine.</div>
+            </div>
+            <div style="padding:16px;background:rgba(164,122,255,0.05);border:1px solid rgba(164,122,255,0.18);border-radius:12px;">
+              <b style="color:#a47aff;font-size:1.02rem;">◈ P. Padma Priya</b>
+              <div style="font-size:0.8rem;color:#55e5ff;font-weight:700;margin:4px 0 2px 0;">Acoustic Signal Intelligence</div>
+              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">WAV & MP3 acoustic header parsing, waveform amplitude visualizer, and cut-point audit.</div>
+            </div>
+            <div style="padding:16px;background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.18);border-radius:12px;">
+              <b style="color:#38bdf8;font-size:1.02rem;">◈ Ashna Zia</b>
+              <div style="font-size:0.8rem;color:#c084fc;font-weight:700;margin:4px 0 2px 0;">Metadata & Container Forensics</div>
+              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">EXIF metadata tag normalization, GPS geotag extraction, and editing software footprint detection.</div>
+            </div>
+            <div style="padding:16px;background:rgba(192,132,252,0.05);border:1px solid rgba(192,132,252,0.18);border-radius:12px;">
+              <b style="color:#c084fc;font-size:1.02rem;">◈ Kaveesha Negi</b>
+              <div style="font-size:0.8rem;color:#38bdf8;font-weight:700;margin:4px 0 2px 0;">Lead Architect & Core Engine</div>
+              <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.4;">Platform architecture, printable forensic certificate pipeline, and SQLite evidence ledger.</div>
+            </div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 # ---------------------------------------------------------
-# 8. CLEAN FOOTER
+# 8. CLEAN GLOBAL FOOTER
 # ---------------------------------------------------------
 st.markdown(
-    '<div class="footer">HashProof AI · Digital Evidence Integrity & Forensic Triage Console<br>'
-    'Document methods, record limitations, and maintain the chain of custody</div>',
+    """
+    <div class="footer" style="margin-top: 50px; padding: 28px 10px; border-top: 1px solid rgba(85,229,255,0.15); text-align: center; color: #94a3b8; font-size: 0.88rem; line-height: 1.7;">
+      <strong style="color: #ffffff; letter-spacing: 0.05em;">HASHPROOF AI</strong> · DIGITAL EVIDENCE INTELLIGENCE CONSOLE<br>
+      <span style="color: #55e5ff; font-weight: 600;">Engineered by</span> 
+      <b style="color: #ffffff;">Mukul Aggarwal</b> &nbsp;·&nbsp; 
+      <b style="color: #ffffff;">P. Padma Priya</b> &nbsp;·&nbsp; 
+      <b style="color: #ffffff;">Ashna Zia</b> &nbsp;·&nbsp; 
+      <b style="color: #ffffff;">Kaveesha Negi</b><br>
+      <span style="font-size: 0.78rem; opacity: 0.8; color: #64748b;">NIST FIPS 180-4 Compliant · Federal Rules of Evidence Rule 902(13)/(14) Self-Authenticating Records</span>
+    </div>
+    """,
     unsafe_allow_html=True
 )

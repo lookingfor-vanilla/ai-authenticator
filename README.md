@@ -108,5 +108,16 @@ HashProof AI generates examination records aligned with digital evidence standar
 
 ---
 
+## 👥 Engineering & Research Team
+
+| Contributor | Specialization | Core Focus |
+|:---|:---|:---|
+| **Mukul Aggarwal** | Cryptography & Bitstream Parity | SHA-256/1 algorithms, parity comparator, avalanche simulator |
+| **P. Padma Priya** | Acoustic Forensic Intelligence | WAV/MP3 header parser, waveform envelope & splice monitor |
+| **Ashna Zia** | Metadata & Container Forensics | EXIF categorization, GPS coordinates, editing footprints |
+| **Kaveesha Negi** | Lead System Architecture | Full-stack platform engine, certificate generator, database ledger |
+
+---
+
 ## 📜 License
 Distributed under the MIT License.
