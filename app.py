@@ -122,6 +122,8 @@ if is_light:
   max-width: 1280px;
   padding-top: 1.4rem;
   padding-bottom: 3.5rem;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
   animation: pageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -522,30 +524,80 @@ div[data-testid="stExpander"]:hover {
 }
 
 /* =========================================================
-   FORENSIC LEFT TASKBAR (AUTOMATIC SLIDING DOCK) - LIGHT MODE
+   FORENSIC LEFT AUTO-HIDING SLIDING TASKBAR - LIGHT MODE
    ========================================================= */
 
-@keyframes sidebarSlideIn {
-  0% { transform: translateX(-40px); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+/* Hide native manual collapse toggle buttons */
+button[data-testid="stSidebarCollapseButton"],
+div[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"] {
+  display: none !important;
 }
 
-@keyframes buttonSlideIn {
-  0% { opacity: 0; transform: translateX(-18px); }
-  100% { opacity: 1; transform: translateX(0); }
+/* Allow main content to take full screen width */
+.main,
+section.main,
+div[data-testid="stMain"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
 }
 
 section[data-testid="stSidebar"] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  width: 310px !important;
+  min-width: 310px !important;
+  max-width: 310px !important;
+  z-index: 999999 !important;
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
-  border-right: 1.5px solid #cbd5e1 !important;
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.04) !important;
-  animation: sidebarSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-right: 4px solid #6366f1 !important;
+  box-shadow: 4px 0 20px rgba(99, 102, 241, 0.2) !important;
+  transform: translateX(-290px) !important;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s ease !important;
+  cursor: pointer;
+}
+
+/* On hover / focus, auto-slide completely into view */
+section[data-testid="stSidebar"]:hover,
+section[data-testid="stSidebar"]:focus-within {
+  transform: translateX(0) !important;
+  box-shadow: 16px 0 50px rgba(15, 23, 42, 0.18) !important;
+  cursor: default;
+}
+
+/* Sleek vertical handle indicator when tucked away */
+section[data-testid="stSidebar"]::after {
+  content: "◈ TASKBAR";
+  position: absolute;
+  top: 50%;
+  right: -24px;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #6366f1;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+section[data-testid="stSidebar"]:hover::after,
+section[data-testid="stSidebar"]:focus-within::after {
+  opacity: 0;
 }
 
 section[data-testid="stSidebar"] > div:first-child {
   padding-top: 1.2rem !important;
   padding-bottom: 2rem !important;
+}
+
+@keyframes buttonSlideIn {
+  0% { opacity: 0; transform: translateX(-18px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 section[data-testid="stSidebar"] div.stButton {
@@ -661,6 +713,8 @@ else:
   max-width: 1280px;
   padding-top: 1.4rem;
   padding-bottom: 3.5rem;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
   animation: pageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -1026,30 +1080,80 @@ div[data-testid="stExpander"]:hover {
 }
 
 /* =========================================================
-   FORENSIC LEFT TASKBAR (AUTOMATIC SLIDING DOCK) - DARK MODE
+   FORENSIC LEFT AUTO-HIDING SLIDING TASKBAR - DARK MODE
    ========================================================= */
 
-@keyframes sidebarSlideInDark {
-  0% { transform: translateX(-40px); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+/* Hide native manual collapse toggle buttons */
+button[data-testid="stSidebarCollapseButton"],
+div[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"] {
+  display: none !important;
 }
 
-@keyframes buttonSlideInDark {
-  0% { opacity: 0; transform: translateX(-18px); }
-  100% { opacity: 1; transform: translateX(0); }
+/* Allow main content to take full screen width */
+.main,
+section.main,
+div[data-testid="stMain"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
 }
 
 section[data-testid="stSidebar"] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  height: 100vh !important;
+  width: 310px !important;
+  min-width: 310px !important;
+  max-width: 310px !important;
+  z-index: 999999 !important;
   background: linear-gradient(180deg, #0d0f22 0%, #070814 100%) !important;
-  border-right: 1px solid rgba(85, 229, 255, 0.16) !important;
-  box-shadow: 6px 0 32px rgba(0, 0, 0, 0.6) !important;
-  animation: sidebarSlideInDark 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-right: 4px solid #55e5ff !important;
+  box-shadow: 4px 0 24px rgba(85, 229, 255, 0.25) !important;
+  transform: translateX(-290px) !important;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s ease !important;
+  cursor: pointer;
+}
+
+/* On hover / focus, auto-slide completely into view */
+section[data-testid="stSidebar"]:hover,
+section[data-testid="stSidebar"]:focus-within {
+  transform: translateX(0) !important;
+  box-shadow: 20px 0 60px rgba(0, 0, 0, 0.7) !important;
+  cursor: default;
+}
+
+/* Sleek vertical handle indicator when tucked away */
+section[data-testid="stSidebar"]::after {
+  content: "◈ TASKBAR";
+  position: absolute;
+  top: 50%;
+  right: -24px;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #55e5ff;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+section[data-testid="stSidebar"]:hover::after,
+section[data-testid="stSidebar"]:focus-within::after {
+  opacity: 0;
 }
 
 section[data-testid="stSidebar"] > div:first-child {
   padding-top: 1.2rem !important;
   padding-bottom: 2rem !important;
+}
+
+@keyframes buttonSlideInDark {
+  0% { opacity: 0; transform: translateX(-18px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 section[data-testid="stSidebar"] div.stButton {
